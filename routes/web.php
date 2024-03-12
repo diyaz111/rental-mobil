@@ -7,6 +7,9 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\TransaksiController;
 use App\Http\Controllers\LaporanController;
+use App\Http\Controllers\Auth\RegisterController;
+use App\Http\Controllers\MobilController;
+use App\Http\Controllers\TransaksiCarController;
 
 /*
 |--------------------------------------------------------------------------
@@ -19,25 +22,29 @@ use App\Http\Controllers\LaporanController;
 |
 */
 
-Route::get('/home', 'HomeController@index')->name('home');
-Route::get('/', 'HomeController@index');
-
+Route::get('/', [HomeController::class, 'index'])->name('home');
 
 Auth::routes();
 
+
 Route::get('/home', [HomeController::class, 'index'])->name('home');
-Route::middleware('role:admin')->get('/buku', function() {
-    return view ('buku/index');
-})->name('buku');
+Route::middleware('role:admin')->get('/mobil', function () {
+    return view('mobil/index');
+})->name('mobil');
 
-Route::resource('/buku', BukuController::class)->middleware('role:admin');
-Route::resource('/roles', RoleController::class)->middleware('role:admin');
-Route::resource('transaksi', TransaksiController::class)->middleware('role:anggota');
+Route::middleware('role:admin')->group(function () {
+    Route::resource('/mobil', MobilController::class);
 
-Route::get('/laporan/trs', [LaporanController::class, 'transaksi']);
-Route::get('/laporan/trs/pdf', [LaporanController::class, 'transaksiPdf']);
-Route::get('/laporan/trs/excel', [LaporanController::class, 'transaksiExcel']);
+    Route::resource('/roles', RoleController::class);
 
-Route::get('/laporan/buku', [LaporanController::class, 'buku']);
-Route::get('/laporan/buku/pdf', [LaporanController::class, 'bukuPdf']);
-Route::get('/laporan/buku/excel', [LaporanController::class, 'bukuExcel']);
+    Route::get('/laporan/trs', [LaporanController::class, 'transaksi']);
+    Route::get('/laporan/trs/pdf', [LaporanController::class, 'transaksiPdf']);
+    Route::get('/laporan/trs/excel', [LaporanController::class, 'transaksiExcel']);
+
+    Route::get('/laporan/buku', [LaporanController::class, 'buku']);
+    Route::get('/laporan/buku/pdf', [LaporanController::class, 'bukuPdf']);
+    Route::get('/laporan/buku/excel', [LaporanController::class, 'bukuExcel']);
+});
+
+Route::resource('/sewa', TransaksiCarController::class)->middleware('role:anggota');
+

@@ -41,11 +41,10 @@ class LoginController extends Controller
 
     protected function authenticated(Request $request, $user)
     {
-        if ($user->hasRole('admin')){
-            return redirect()->route('buku.index');
+        if ($user->hasRole('admin')) {
+            return redirect()->route('mobil.index');
         }
 
-        return redirect()->route('transaksi.index');
+        return redirect()->route('sewa.index');
     }
-
 }

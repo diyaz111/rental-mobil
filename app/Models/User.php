@@ -15,7 +15,7 @@ class User extends Authenticatable
     use HasRoles;
     public function transaksi()
     {
-    	return $this->hasMany(Transaksi::class);
+        return $this->hasMany(Transaksi::class);
     }
     /**
      * The attributes that are mass assignable.
@@ -26,6 +26,9 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'sim',
+        'alamat',
+        'mobile_phone'
     ];
 
     /**

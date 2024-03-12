@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use App\Models\Transaksi;
 use App\Models\User;
 use App\Models\Buku;
+use App\Models\Mobil;
+use App\Models\TransaksiCar;
 use Auth;
 
 
@@ -28,17 +30,17 @@ class HomeController extends Controller
      */
     public function index()
     {
-        
-        $transaksi = Transaksi::get();
+
+        $transaksi = TransaksiCar::get();
         $user   = User::get();
-        $buku      = Buku::get();
+        $buku      = Mobil::get();
         if(Auth::user()->role == 'anggota')
         {
-            $datas = Transaksi::where('status', 'pinjam')
+            $datas = TransaksiCar::where('status', 'sewa')
                                 ->where('user_id', Auth::user()->user->id)
                                 ->get();
         } else {
-            $datas = Transaksi::where('status', 'pinjam')->get();
+            $datas = TransaksiCar::where('status', 'sewa')->get();
         }
         return view('home', compact('transaksi', 'user', 'buku', 'datas'));
     }

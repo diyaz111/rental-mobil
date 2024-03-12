@@ -60,14 +60,14 @@
                       <i class="mdi mdi-book text-success icon-lg" style="width: 40px;height: 40px;"></i>
                     </div>
                     <div class="float-right">
-                      <p class="mb-0 text-right">Buku</p>
+                      <p class="mb-0 text-right">mobil</p>
                       <div class="fluid-container">
                         <h3 class="font-weight-medium text-right mb-0">{{$buku->count()}}</h3>
                       </div>
                     </div>
                   </div>
                   <p class="text-muted mt-3 mb-0">
-                    <i class="mdi mdi-book mr-1" aria-hidden="true"></i> Total judul buku
+                    <i class="mdi mdi-book mr-1" aria-hidden="true"></i> Total mobil
                   </p>
                 </div>
               </div>
@@ -99,7 +99,7 @@
 
                 <div class="card-body">
                   <h4 class="card-title">Data Transaksi sedang pinjam</h4>
-                  
+
                   <div class="table-responsive">
                     <table class="table table-striped" id="table">
                       <thead>
@@ -131,14 +131,14 @@
                       @foreach($datas as $data)
                         <tr>
                           <td class="py-1">
-                          <a href="{{route('transaksi.show', $data->id)}}"> 
+                          <a href="{{route('transaksi.show', $data->id)}}">
                             {{$data->kode_transaksi}}
                           </a>
                           </td>
                           <td>
-                          
+
                             {{$data->buku->judul}}
-                          
+
                           </td>
 
                           <td>
@@ -164,7 +164,7 @@
                             <button class="btn btn-info btn-sm" onclick="return confirm('Anda yakin data ini sudah kembali?')">Sudah Kembali
                             </button>
                           </form>
-                          
+
                           </td>
                         </tr>
                       @endforeach
